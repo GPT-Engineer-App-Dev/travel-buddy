@@ -1,6 +1,7 @@
 import { Box, Container, VStack, Text, Image, Input, Button, HStack, Flex, Heading, SimpleGrid } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
 import { FaPlane, FaHotel, FaCar } from "react-icons/fa";
+import { useNavigate } from "react-router-dom"; // Import useNavigate
 
 const Index = () => {
   const [departure, setDeparture] = useState("");
@@ -9,6 +10,7 @@ const Index = () => {
   const [returnDate, setReturnDate] = useState("");
   const [passengers, setPassengers] = useState(1);
   const [flightResults, setFlightResults] = useState([]);
+  const navigate = useNavigate(); // Initialize useNavigate
 
   const handleFlightSearch = () => {
     // Mock flight search results
@@ -29,6 +31,15 @@ const Index = () => {
       },
     ];
     setFlightResults(results);
+  };
+
+  const handleBooking = (flight) => {
+    const bookingDetails = {
+      ...flight,
+      passengers,
+      confirmationNumber: Math.floor(Math.random() * 1000000), // Generate a random confirmation number
+    };
+    navigate("/booking-confirmation", { state: bookingDetails });
   };
 
   return (
@@ -109,6 +120,7 @@ const Index = () => {
                 <Text>Arrival: {flight.arrivalTime}</Text>
                 <Text>Duration: {flight.duration}</Text>
                 <Text>Price: {flight.price}</Text>
+                <Button colorScheme="blue" mt={4} onClick={() => handleBooking(flight)}>Book Now</Button>
               </Box>
             ))}
           </SimpleGrid>
