@@ -1,7 +1,36 @@
 import { Box, Container, VStack, Text, Image, Input, Button, HStack, Flex, Heading, SimpleGrid } from "@chakra-ui/react";
+import { useState, useEffect } from "react";
 import { FaPlane, FaHotel, FaCar } from "react-icons/fa";
 
 const Index = () => {
+  const [departure, setDeparture] = useState("");
+  const [arrival, setArrival] = useState("");
+  const [departureDate, setDepartureDate] = useState("");
+  const [returnDate, setReturnDate] = useState("");
+  const [passengers, setPassengers] = useState(1);
+  const [flightResults, setFlightResults] = useState([]);
+
+  const handleFlightSearch = () => {
+    // Mock flight search results
+    const results = [
+      {
+        airline: "Airline A",
+        departureTime: "10:00 AM",
+        arrivalTime: "12:00 PM",
+        duration: "2h",
+        price: "$200",
+      },
+      {
+        airline: "Airline B",
+        departureTime: "2:00 PM",
+        arrivalTime: "4:00 PM",
+        duration: "2h",
+        price: "$250",
+      },
+    ];
+    setFlightResults(results);
+  };
+
   return (
     <Box>
       {/* Navigation Bar */}
@@ -32,10 +61,16 @@ const Index = () => {
           <VStack spacing={4}>
             <Heading as="h2" size="xl" textAlign="center">Find Your Perfect Trip</Heading>
             <HStack spacing={4} width="100%">
-              <Input placeholder="Flights" leftIcon={<FaPlane />} />
-              <Input placeholder="Hotels" leftIcon={<FaHotel />} />
-              <Input placeholder="Car Rentals" leftIcon={<FaCar />} />
-              <Button colorScheme="blue">Search</Button>
+              <Input placeholder="Departure" value={departure} onChange={(e) => setDeparture(e.target.value)} />
+              <Input placeholder="Arrival" value={arrival} onChange={(e) => setArrival(e.target.value)} />
+            </HStack>
+            <HStack spacing={4} width="100%">
+              <Input type="date" placeholder="Departure Date" value={departureDate} onChange={(e) => setDepartureDate(e.target.value)} />
+              <Input type="date" placeholder="Return Date" value={returnDate} onChange={(e) => setReturnDate(e.target.value)} />
+            </HStack>
+            <HStack spacing={4} width="100%">
+              <Input type="number" placeholder="Passengers" value={passengers} onChange={(e) => setPassengers(e.target.value)} min={1} />
+              <Button colorScheme="blue" onClick={handleFlightSearch}>Search Flights</Button>
             </HStack>
           </VStack>
         </Container>
@@ -62,6 +97,23 @@ const Index = () => {
           </Box>
         </SimpleGrid>
       </Container>
+
+      {flightResults.length > 0 && (
+        <Container maxW="container.xl" py={16}>
+          <Heading as="h3" size="lg" mb={8}>Flight Results</Heading>
+          <SimpleGrid columns={{ base: 1, md: 2 }} spacing={8}>
+            {flightResults.map((flight, index) => (
+              <Box key={index} bg="gray.100" p={4} borderRadius="md">
+                <Text fontSize="lg" fontWeight="bold">{flight.airline}</Text>
+                <Text>Departure: {flight.departureTime}</Text>
+                <Text>Arrival: {flight.arrivalTime}</Text>
+                <Text>Duration: {flight.duration}</Text>
+                <Text>Price: {flight.price}</Text>
+              </Box>
+            ))}
+          </SimpleGrid>
+        </Container>
+      )}
 
       {/* Special Offers */}
       <Box bg="blue.50" py={16}>
