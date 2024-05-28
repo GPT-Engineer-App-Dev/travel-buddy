@@ -1,19 +1,116 @@
-// Update this page (the content is just a fallback if you fail and example)
-// Use chakra-ui
-import { Container, Text, VStack } from "@chakra-ui/react";
-
-// Example of using react-icons
-// import { FaRocket } from "react-icons/fa";
-// <IconButton aria-label="Add" icon={<FaRocket />} size="lg" />; // IconButton would also have to be imported from chakra
+import { Box, Container, VStack, Text, Image, Input, Button, HStack, Flex, Heading, SimpleGrid } from "@chakra-ui/react";
+import { FaPlane, FaHotel, FaCar } from "react-icons/fa";
 
 const Index = () => {
   return (
-    <Container centerContent maxW="container.md" height="100vh" display="flex" flexDirection="column" justifyContent="center" alignItems="center">
-      <VStack spacing={4}>
-        <Text fontSize="2xl">Your Blank Canvas</Text>
-        <Text>Chat with the agent to start making edits.</Text>
-      </VStack>
-    </Container>
+    <Box>
+      {/* Navigation Bar */}
+      <Box as="nav" bg="blue.600" color="white" py={4}>
+        <Container maxW="container.xl" display="flex" justifyContent="space-between" alignItems="center">
+          <Heading as="h1" size="lg">TravelBooking</Heading>
+          <HStack spacing={8}>
+            <Text cursor="pointer">Home</Text>
+            <Text cursor="pointer">Destinations</Text>
+            <Text cursor="pointer">Bookings</Text>
+            <Text cursor="pointer">Contact Us</Text>
+          </HStack>
+        </Container>
+      </Box>
+
+      {/* Hero Section */}
+      <Box
+        as="section"
+        bgImage="url('/images/hero-background.jpg')"
+        bgSize="cover"
+        bgPosition="center"
+        height="60vh"
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
+      >
+        <Container maxW="container.md" bg="rgba(255, 255, 255, 0.8)" p={8} borderRadius="md">
+          <VStack spacing={4}>
+            <Heading as="h2" size="xl" textAlign="center">Find Your Perfect Trip</Heading>
+            <HStack spacing={4} width="100%">
+              <Input placeholder="Flights" leftIcon={<FaPlane />} />
+              <Input placeholder="Hotels" leftIcon={<FaHotel />} />
+              <Input placeholder="Car Rentals" leftIcon={<FaCar />} />
+              <Button colorScheme="blue">Search</Button>
+            </HStack>
+          </VStack>
+        </Container>
+      </Box>
+
+      {/* Featured Destinations */}
+      <Container maxW="container.xl" py={16}>
+        <Heading as="h3" size="lg" mb={8}>Featured Destinations</Heading>
+        <SimpleGrid columns={{ base: 1, md: 3 }} spacing={8}>
+          <Box bg="gray.100" p={4} borderRadius="md">
+            <Image src="https://via.placeholder.com/300" alt="Destination 1" borderRadius="md" />
+            <Text mt={2} fontSize="lg" fontWeight="bold">Destination 1</Text>
+            <Text>Explore the beauty of Destination 1.</Text>
+          </Box>
+          <Box bg="gray.100" p={4} borderRadius="md">
+            <Image src="https://via.placeholder.com/300" alt="Destination 2" borderRadius="md" />
+            <Text mt={2} fontSize="lg" fontWeight="bold">Destination 2</Text>
+            <Text>Discover the wonders of Destination 2.</Text>
+          </Box>
+          <Box bg="gray.100" p={4} borderRadius="md">
+            <Image src="https://via.placeholder.com/300" alt="Destination 3" borderRadius="md" />
+            <Text mt={2} fontSize="lg" fontWeight="bold">Destination 3</Text>
+            <Text>Experience the charm of Destination 3.</Text>
+          </Box>
+        </SimpleGrid>
+      </Container>
+
+      {/* Special Offers */}
+      <Box bg="blue.50" py={16}>
+        <Container maxW="container.xl">
+          <Heading as="h3" size="lg" mb={8}>Special Offers</Heading>
+          <SimpleGrid columns={{ base: 1, md: 2 }} spacing={8}>
+            <Box bg="white" p={4} borderRadius="md" boxShadow="md">
+              <Text fontSize="lg" fontWeight="bold">Offer 1</Text>
+              <Text>Get 20% off on your next trip to Destination 1.</Text>
+            </Box>
+            <Box bg="white" p={4} borderRadius="md" boxShadow="md">
+              <Text fontSize="lg" fontWeight="bold">Offer 2</Text>
+              <Text>Save $100 on bookings for Destination 2.</Text>
+            </Box>
+          </SimpleGrid>
+        </Container>
+      </Box>
+
+      {/* Customer Testimonials */}
+      <Container maxW="container.xl" py={16}>
+        <Heading as="h3" size="lg" mb={8}>Customer Testimonials</Heading>
+        <SimpleGrid columns={{ base: 1, md: 2 }} spacing={8}>
+          <Box bg="gray.100" p={4} borderRadius="md">
+            <Text fontSize="lg" fontWeight="bold">Customer 1</Text>
+            <Text>"Amazing experience! Highly recommend TravelBooking."</Text>
+          </Box>
+          <Box bg="gray.100" p={4} borderRadius="md">
+            <Text fontSize="lg" fontWeight="bold">Customer 2</Text>
+            <Text>"Great deals and excellent customer service."</Text>
+          </Box>
+        </SimpleGrid>
+      </Container>
+
+      {/* Footer */}
+      <Box as="footer" bg="blue.600" color="white" py={8}>
+        <Container maxW="container.xl" display="flex" justifyContent="space-between" alignItems="center">
+          <Text>&copy; 2023 TravelBooking. All rights reserved.</Text>
+          <HStack spacing={4}>
+            <Text cursor="pointer">Terms of Service</Text>
+            <Text cursor="pointer">Privacy Policy</Text>
+            <HStack spacing={2}>
+              <Text cursor="pointer">Facebook</Text>
+              <Text cursor="pointer">Twitter</Text>
+              <Text cursor="pointer">Instagram</Text>
+            </HStack>
+          </HStack>
+        </Container>
+      </Box>
+    </Box>
   );
 };
 
